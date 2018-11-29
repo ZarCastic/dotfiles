@@ -1,0 +1,29 @@
+[diff]
+	tool = nvimdiff
+[core]
+	editor = nvim
+	autocrlf = false
+	fileMode = false
+	excludesfile = ~/.gitignore
+[difftool]
+	prompt = true
+[alias]
+	d = difftool
+[color]
+	ui = true
+[help]
+	autocorrect = 20
+[merge]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[mergetool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[user]
+	email = tobias.fuchst@tum.de
+	name = Tobias Fuchs
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

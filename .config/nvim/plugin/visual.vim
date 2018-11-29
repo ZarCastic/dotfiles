@@ -1,0 +1,20 @@
+" theme
+set t_Co=256
+set termguicolors
+syntax on
+set background=dark
+let ayucolor="mirage"
+colorscheme ayu
+
+" editor
+set cursorline
+set cursorcolumn
+set noshowmode
+set number
+set relativenumber
+set showcmd
+set showmatch
+set fillchars=vert:\|
+set signcolumn=yes
+set laststatus=2
+set showtabline=2
