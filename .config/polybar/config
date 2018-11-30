@@ -23,9 +23,9 @@ warning = ${xrdb:color3:#222}
 active-led = ${xrdb:color1:#222}
 
 [bar/bar0]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = DP-4
 width = 100%
-height = 18
+height = 35
 fixed-center = false
 
 background = ${colors.background}
@@ -43,17 +43,54 @@ padding-right = 0
 module-margin-left = 2
 module-margin-right = 0
 
-font-0 = Fira Mono Medium:pixelsize=8; 2
-font-1 = Font Awesome 5 Free:style=Solid:pixelsize=9; 2
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=9; 2
-font-3 = Font Awesome 5 Brands:pixelsize=9; 2
-font-4 = Font Awesome 5 Free:style=Solid:pixelsize=7; 2
+font-0 = Font Awesome 5 Free:style=Regular:pixelsize=14; 2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=19; 2
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=19; 2
+font-3 = Font Awesome 5 Brands:pixelsize=19; 2
+font-4 = Font Awesome 5 Free:style=Solid:pixelsize=17; 2
 
 modules-left = i3
 modules-center = xwindow
-modules-right = volume gap shipping_forecast gmail filesystem cpu temperature wlan eth battery date xkeyboard gap
+modules-right = filesystem cpu temperature wlan eth battery xkeyboard date gap
 
 tray-position = right
+tray-padding = 2
+
+wm-restack = i3
+
+[bar/bar1]
+monitor = DP-2
+width = 100%
+height = 25
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 2
+module-margin-right = 0
+
+#font-0 = Fira Mono Medium:pixelsize=13; 2
+font-0 = Font Awesome 5 Free:style=Regular:pixelsize=14; 2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=14; 2
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=14; 2
+font-3 = Font Awesome 5 Brands:pixelsize=14; 2
+font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12; 2
+
+modules-left = i3
+modules-center = xwindow
+#modules-right = filesystem cpu temperature wlan eth battery xkeyboard date gap
+
+#tray-position = right
 tray-padding = 2
 
 wm-restack = i3
@@ -99,15 +136,15 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
-ws-icon-0 = 1: shell;%{T5}%{T-}
-ws-icon-1 = 2: email;
-ws-icon-2 = 3: chat;
+ws-icon-0 = 1; %{T5}%{T-}
+ws-icon-1 = 2; 
+ws-icon-2 = 3: chat
 ws-icon-3 = 4: music;
 ws-icon-4 = 5: ruby;%{T3}%{T-}
-ws-icon-5 = 9: www;
+ws-icon-5 = 6; 
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%: %icon%
@@ -172,7 +209,7 @@ ramp-signal-7 = ${env:POLYBAR_RAMP_7}
 
 [module/eth]
 type = internal/network
-interface = enp9s0
+interface = enp0s31f6
 interval = 3.0
 
 ; format-connected-underline = #55aa55
@@ -193,8 +230,8 @@ interval = 5
 date =
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
-time-alt = %H:%M:%S
+time = %H-%M
+time-alt = %H-%M-%S
 
 label = %date% %time%
 
