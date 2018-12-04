@@ -262,7 +262,6 @@ bindsym $mod+Mod1+l exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id $network_applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
@@ -274,6 +273,9 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec --no-startup-id xrandr --output DP-2 --rotate right --left-of DP-4
+exec --no-startup-id xrandr --output DP-4 --primary
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id tmux start-server
 exec --no-startup-id $mail
