@@ -59,15 +59,16 @@ bindsym $mod+z exec --no-startup-id morc_menu
 
 # media control
 # Media player controls
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioPlay exec $HOME/Scripts/spotify_playPause
+bindsym $mod+Right exec playerctl next
+bindsym $mod+Left exec playerctl previous
+bindsym $mod+Up exec $HOME/Scripts/spotify_playPause
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
 exec --no-startup-id volumeicon
+exec --no-startup-id ibus-daemon
 bindsym $mod+Ctrl+m exec termite -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
