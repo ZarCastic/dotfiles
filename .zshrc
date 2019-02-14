@@ -120,6 +120,7 @@ source $HOME/Scripts/functions.sh
 #
 source ~/.aliases.zsh
 
+eval $(thefuck --alias)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export TERM=xterm-256color

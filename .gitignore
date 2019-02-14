@@ -62,3 +62,4 @@ exercise1.aux
 *.toc
 .venv
 .ipynb_checkpoints
+todo.md
