@@ -42,7 +42,7 @@ autocmd BufWritePre * StripWhitespace
 " Completion {{{
 " deoplete.nvim (autocompletion)
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = "/usr/local/lib/libclang.so"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
 let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++1z', 'objc': 'c11', 'objcpp': 'c++1z'}
 "}}}

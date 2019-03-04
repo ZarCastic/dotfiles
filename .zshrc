@@ -20,8 +20,8 @@ zplug load --verbose
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR="nvim"
 export _JAVA_AWT_WM_NONREPARENTING=1
-#export CXX='clang++'
-#export CC='clang'
+export CXX='clang++'
+export CC='clang'
 set -o vi
 
 # dangit CDPATH
@@ -120,8 +120,11 @@ source $HOME/Scripts/functions.sh
 #
 source ~/.aliases.zsh
 
+eval $(thefuck --alias)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export TERM=xterm-256color
 export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH=$PATH:$HOME/Scripts:$HOME/bin
+
+
