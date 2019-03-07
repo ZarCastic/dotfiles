@@ -64,3 +64,5 @@ exercise1.aux
 .ipynb_checkpoints
 todo.md
 .hidden.make
+*.ioc
+.mxproject
