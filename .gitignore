@@ -63,3 +63,4 @@ exercise1.aux
 .venv
 .ipynb_checkpoints
 todo.md
+.hidden.make
