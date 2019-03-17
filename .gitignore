@@ -68,3 +68,5 @@ todo.md
 *.ist
 *.syg
 .hidden.make
+.ipynb_checkpoints
+todo.md

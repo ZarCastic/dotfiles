@@ -51,7 +51,7 @@ font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12; 2
 
 modules-left = i3
 modules-center = xwindow
-modules-right = filesystem cpu temperature wlan eth battery xkeyboard date gap
+modules-right = filesystem cpu temperature wlan eth battery  date gap
 
 tray-position = right
 tray-padding = 2
@@ -88,7 +88,7 @@ font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12; 2
 
 modules-left = i3
 modules-center = xwindow
-#modules-right = filesystem cpu temperature wlan eth battery xkeyboard date gap
+#modules-right = filesystem cpu temperature wlan eth battery  date gap
 
 #tray-position = right
 tray-padding = 2
