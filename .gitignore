@@ -61,6 +61,13 @@ exercise1.aux
 *.snm
 *.toc
 .venv
+*.h5
+*.csv
+todo.md
+*.acn
+*.ist
+*.syg
+.hidden.make
 .ipynb_checkpoints
 todo.md
 *.h5
