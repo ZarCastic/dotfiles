@@ -16,7 +16,7 @@ set $mod Mod4
 
 # set default programs
 set $browser firefox
-set $terminal "kitty"
+set $terminal "st"
 set $screenshot screengrab
 set $mail thunderbird
 set $network_applet nm-applet
