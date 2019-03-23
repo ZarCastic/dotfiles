@@ -8,3 +8,4 @@ volumeicon &
 compton &
 setxkbmap -option caps:swapescape &
 wal -i Pictures/Wallpaper/wallpaper.jpg &
+time.sh&
