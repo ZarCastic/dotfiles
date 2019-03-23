@@ -16,13 +16,14 @@ set $mod Mod4
 
 # set default programs
 set $browser firefox
-set $terminal "kitty"
+set $terminal "st"
 set $screenshot screengrab
 set $mail thunderbird
 set $network_applet nm-applet
 set $volume_applet volumeicon
 set $notification_manager dunst
 
+exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1
 new_float normal
@@ -267,11 +268,12 @@ bindsym $mod+Mod1+l exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nitrogen --restore;
 exec --no-startup-id $network_applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec_always --no-startup-id (nohup compton &)
 exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
@@ -279,7 +281,7 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id tmux start-server
 exec --no-startup-id $mail
 exec --no-startup-id setxkbmap -option caps:swapescape
@@ -418,3 +420,5 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+exec_always /$HOME/.config/i3/init.sh

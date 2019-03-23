@@ -20,8 +20,8 @@ zplug load --verbose
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR="nvim"
 export _JAVA_AWT_WM_NONREPARENTING=1
-#export CXX='clang++'
-#export CC='clang'
+export CXX='clang++'
+export CC='clang'
 set -o vi
 
 # dangit CDPATH
@@ -126,3 +126,4 @@ eval $(thefuck --alias)
 export TERM=xterm-256color
 export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH=$PATH:$HOME/Scripts:$HOME/bin
+source /usr/lib/ruby/gems/2.6.0/gems/tmuxinator-0.15.0/completion/tmuxinator.zsh
