@@ -81,8 +81,6 @@ set hlsearch
 set ignorecase
 set smartcase
 " }}}
-"autochdir
-set autochdir
 " autosave
 au FocusLost * silent! wa
 " History and undo {{{
@@ -101,6 +99,7 @@ set ttyfast
 set so=3
 inoremap jj <esc>
 inoremap kk <esc>
+set relativnumber
 " }}}
 " Save on Enter
 nnoremap <cr> :w<cr>
