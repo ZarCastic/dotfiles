@@ -84,6 +84,7 @@ set smartcase
 " }}}
 " autosave
 au FocusLost * silent! wa
+set autowriteall
 " History and undo {{{
 set history=1000
 set undofile
