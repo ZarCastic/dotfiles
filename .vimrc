@@ -15,6 +15,7 @@ Plug 'dense-analysis/ale'
 Plug 'ycm-core/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'nanotech/jellybeans.vim'
+Plug 'Raimondi/delimitMate' 
 call plug#end()
 " }}}
 " UltiSnips{{{
@@ -99,7 +100,7 @@ set ttyfast
 set so=3
 inoremap jj <esc>
 inoremap kk <esc>
-set relativnumber
+set relativenumber
 " }}}
 " Save on Enter
 nnoremap <cr> :w<cr>
