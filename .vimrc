@@ -104,7 +104,7 @@ inoremap kk <esc>
 set relativenumber
 " }}}
 " Save on Enter
-nnoremap <cr> :w<cr>
+nnoremap <cr> :w \|  nohlsearch<cr>
 " switch
 nnoremap <leader><leader> <c-^>
 " Sane Movement {{{
