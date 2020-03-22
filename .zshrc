@@ -2,8 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR="nvim"
 export _JAVA_AWT_WM_NONREPARENTING=1
-export CXX='clang++'
-export CC='clang'
 set -o vi
 
 # dangit CDPATH
