@@ -1,21 +1,3 @@
-# for virtualenv
-source =virtualenvwrapper.sh
-
-# Plugins :)
-source ~/.zplug/init.zsh
-
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR="nvim"
@@ -102,7 +84,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
@@ -127,4 +109,4 @@ export TERM=xterm-256color
 export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH=$PATH:$HOME/Scripts:$HOME/bin
 
-
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
