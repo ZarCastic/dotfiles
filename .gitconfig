@@ -1,7 +1,7 @@
 [diff]
-	tool = nvimdiff
+	tool = vimdiff
 [core]
-	editor = nvim
+	editor = vim
 	autocrlf = false
 	fileMode = false
 	excludesfile = ~/.gitignore
@@ -15,12 +15,8 @@
 	autocorrect = 20
 [merge]
 	tool = nvimdiff
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-[mergetool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [user]
-	email = tobias.fuchst@tum.de
+	email = fuchstobs@gmail.com
 	name = Tobias Fuchs
 [filter "lfs"]
 	clean = git-lfs clean -- %f

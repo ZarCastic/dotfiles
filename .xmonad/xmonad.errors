@@ -1,0 +1,8 @@
+
+xmonad.hs:88:102: error:
+    • Variable not in scope: xmproc2 :: GHC.IO.Handle.Types.Handle
+    • Perhaps you meant one of these:
+        ‘xmproc0’ (line 82), ‘xmproc1’ (line 83)
+   |
+88 |                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
+   |                                                                                                      ^^^^^^^
