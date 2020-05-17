@@ -110,10 +110,11 @@ main = do
 ---AUTOSTART
 ------------------------------------------------------------------------
 myStartupHook = do
-          spawnOnce "xrandr --output DP-2 --left-of DP-4 &"
+          spawnOnce "clipit &"
+          spawnOnce "deadd-notification-center &"
           spawnOnce "nitrogen --restore &" 
-          spawnOnce "stalonetray -c ~/.config/stalonetray/stalonetrayrc &" 
           spawnOnce "picom &" 
+          spawnOnce "setxkbmap -option 'caps:swapescape' &"
           setWMName "LG3D"
           --spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 15 --transparent true --alpha 0 --tint 0x292d3e --height 19 &"
 
@@ -249,13 +250,16 @@ myKeys =
     --- Dmenu Scripts (Alt+Ctr+Key)
         , ("M-d", spawn "rofi -show run")
 
+    -- Toggle notification area 
+        , ("M-n", spawn "$HOME/Scripts/notification_center")
+
     -- Multimedia Keys
         , ("<XF86AudioPlay>", spawn "playerctl play-pause")
         , ("<XF86AudioPrev>", spawn "playerctl previous")
         , ("<XF86AudioNext>", spawn "playerctl next")
-        , ("<XF86AudioMute>",   spawn "amixer set Master toggle")  -- Bug prevents it from toggling correctly in 12.04.
-        , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
-        , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+        , ("<XF86AudioMute>",   spawn "$HOME/Scripts/volume_indicator mute")  -- Bug prevents it from toggling correctly in 12.04.
+        , ("<XF86AudioLowerVolume>", spawn "$HOME/Scripts/volume_indicator dec")
+        , ("<XF86AudioRaiseVolume>", spawn "$HOME/Scripts/volume_indicator inc")
         , ("<Print>", spawn "scrotd 0")
         ] where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
@@ -279,14 +283,14 @@ myWorkspaces = clickable . (map xmobarEscape)
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [
-        className =? "Firefox"     --> doShift "<action=xdotool key super+2>www</action>"
-      , title =? "Vivaldi"         --> doShift "<action=xdotool key super+2>www</action>"
-      , title =? "irssi"           --> doShift "<action=xdotool key super+6>chat</action>"
-      , className =? "cmus"        --> doShift "<action=xdotool key super+7>media</action>"
-      , className =? "vlc"         --> doShift "<action=xdotool key super+7>media</action>"
+        className =? "Firefox"     --> doShift "<action=xdotool key super+2>[2]</action>"
+      , title =? "Vivaldi"         --> doShift "<action=xdotool key super+2>[2]</action>"
+      , title =? "irssi"           --> doShift "<action=xdotool key super+6>[6]</action>"
+      , className =? "cmus"        --> doShift "<action=xdotool key super+7>[7]</action>"
+      , className =? "vlc"         --> doShift "<action=xdotool key super+7>[7]</action>"
       , className =? "Virtualbox"  --> doFloat
       , className =? "Gimp"        --> doFloat
-      , className =? "Gimp"        --> doShift "<action=xdotool key super+8>gfx</action>"
+      , className =? "Gimp"        --> doShift "<action=xdotool key super+8>[8]</action>"
       , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
