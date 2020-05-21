@@ -312,16 +312,16 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
 ---POLYBAR WORKSPACES
 fmt curr ws vis hid tg  | curr == tg   = "%{B#daba8b} [" ++ tg ++ "] %{B-}"
                 | tg `elem` vis    = "%{B#c3e88d} " ++ tg ++ " %{B-}"
-                | tg `elem` hid    = " " ++ tg ++ " "
+                | tg `elem` hid    = "%{B#c3e88d} " ++ tg ++ "* %{B-}"
                 | otherwise        = " " ++ tg ++ " "
 
-getTag ws = W.tag ws 
+hasWindow s = isJust (W.stack s)
 
 eventLogHook = do
     winset <- gets windowset
     let curr = W.currentTag winset
     let visible = map W.tag (map W.workspace (W.visible winset))
-    let hidden = map W.tag (W.hidden winset)
+    let hidden = map W.tag (filter hasWindow (W.hidden winset))
     let ws = W.workspaces winset
 
     let workspaceString = join $ map (fmt curr ws visible hidden) myWorkspaces
