@@ -20,6 +20,7 @@ import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (safeSpawn, unsafeSpawn, runInTerm, spawnPipe)
 import XMonad.Util.SpawnOnce
+import Control.Monad (join)
 
     -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
@@ -74,50 +75,44 @@ myFont          = "xft:Mononoki Nerd Font:regular:pixelsize=12"
 myModMask       = mod4Mask  -- Sets modkey to super/windows key
 myTerminal      = "st"      -- Sets default terminal
 myTextEditor    = "vim"     -- Sets default text editor
-myBorderWidth   = 2         -- Sets border width for windows
-windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+myBorderWidth   = 3         -- Sets border width for windows
 
 main = do
-    -- Launching two instances of xmobar on their monitors.
-    xmproc0 <- spawnPipe "xmobar -x 0 ${HOME}/.config/xmobar/xmobarrc0"
-    xmproc1 <- spawnPipe "xmobar -x 1 ${HOME}/.config/xmobar/xmobarrc0"
-    -- the xmonad, ya know...what the WM is named after!
     xmonad $ ewmh desktopConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageHook desktopConfig <+> manageDocks
-        , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x  
-                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
-                        , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#F07178" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#d0d0d0" "" . shorten 80     -- Title of active window in xmobar
-                        , ppSep =  "<fc=#666666> | </fc>"                     -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
-                        , ppExtras  = [windowCount]                           -- # of windows current workspace
-                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                        }
+        , logHook            = eventLogHook
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
         , layoutHook         = myLayoutHook 
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
-        , normalBorderColor  = "#292d3e"
-        , focusedBorderColor = "#bbc5ff"
-        } `additionalKeysP`         myKeys 
+        , normalBorderColor  = "#191716"
+        , focusedBorderColor = "#daba8b"
+        } `additionalKeysP` myKeys 
 
 ------------------------------------------------------------------------
 ---AUTOSTART
 ------------------------------------------------------------------------
 myStartupHook = do
-          spawnOnce "clipit &"
-          spawnOnce "deadd-notification-center &"
-          spawnOnce "nitrogen --restore &" 
-          spawnOnce "picom &" 
-          spawnOnce "setxkbmap -option 'caps:swapescape' &"
-          setWMName "LG3D"
-          --spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 15 --transparent true --alpha 0 --tint 0x292d3e --height 19 &"
+        spawn "killall picom xwinwrap polybar feh clipit deadd-notification-center nm-applet"
 
+        spawn "clipit "
+        spawn "deadd-notification-center "
+        spawn "nitrogen --restore " 
+        spawn "setxkbmap -option 'caps:swapescape' "
+        spawn "nm-applet "
+
+        spawn "rm /tmp/xmonad-workspace-log "
+        spawn "picom "
+
+        -- default pointer
+        spawn "xsetroot -cursor_name left_ptr "
+
+        -- bar
+        spawn "polybar bar0 "
+        spawn "polybar bar1 "
+        
 ------------------------------------------------------------------------
 ---GRID SELECT
 ------------------------------------------------------------------------
@@ -246,7 +241,7 @@ myKeys =
     -- Open My Preferred Terminal. I also run the FISH shell. Setting FISH as my default shell 
     -- breaks some things so I prefer to just launch "fish" when I open a terminal.
         , ("M-<Return>", spawn (myTerminal ))
-		
+
     --- Dmenu Scripts (Alt+Ctr+Key)
         , ("M-d", spawn "rofi -show run")
 
@@ -267,37 +262,19 @@ myKeys =
 ------------------------------------------------------------------------
 ---WORKSPACES
 ------------------------------------------------------------------------
-
-xmobarEscape = concatMap doubleLts
-  where
-        doubleLts '<' = "<<"
-        doubleLts x   = [x]
-        
 myWorkspaces :: [String]   
-myWorkspaces = clickable . (map xmobarEscape) 
-               $ [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" ]
-  where                                                                      
-        clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
-                      (i,ws) <- zip [1..9] l,                                        
-                      let n = i ] 
+myWorkspaces =  [ "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" ]
+ 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [
-        className =? "Firefox"     --> doShift "<action=xdotool key super+2>[2]</action>"
-      , title =? "Vivaldi"         --> doShift "<action=xdotool key super+2>[2]</action>"
-      , title =? "irssi"           --> doShift "<action=xdotool key super+6>[6]</action>"
-      , className =? "cmus"        --> doShift "<action=xdotool key super+7>[7]</action>"
-      , className =? "vlc"         --> doShift "<action=xdotool key super+7>[7]</action>"
-      , className =? "Virtualbox"  --> doFloat
-      , className =? "Gimp"        --> doFloat
-      , className =? "Gimp"        --> doShift "<action=xdotool key super+8>[8]</action>"
+      className =? "Pavucontrol"  --> doFloat
       , (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 ------------------------------------------------------------------------
 ---LAYOUTS
 ------------------------------------------------------------------------
-
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $ 
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
@@ -318,7 +295,6 @@ floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 ------------------------------------------------------------------------
 
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                , NS "cmus" spawnCmus findCmus manageCmus  
                 ]
 
     where
@@ -330,11 +306,23 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnCmus  = myTerminal ++  " -n cmus 'cmus'"
-    findCmus   = resource =? "cmus"
-    manageCmus = customFloating $ W.RationalRect l t w h
-                 where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
+
+
+------------------------------------------------------------------------
+---POLYBAR WORKSPACES
+fmt curr ws vis hid tg  | curr == tg   = "%{B#daba8b} [" ++ tg ++ "] %{B-}"
+                | tg `elem` vis    = "%{B#c3e88d} " ++ tg ++ " %{B-}"
+                | tg `elem` hid    = " " ++ tg ++ " "
+                | otherwise        = " " ++ tg ++ " "
+
+getTag ws = W.tag ws 
+
+eventLogHook = do
+    winset <- gets windowset
+    let curr = W.currentTag winset
+    let visible = map W.tag (map W.workspace (W.visible winset))
+    let hidden = map W.tag (W.hidden winset)
+    let ws = W.workspaces winset
+
+    let workspaceString = join $ map (fmt curr ws visible hidden) myWorkspaces
+    io $ appendFile "/tmp/xmonad-workspace-log" (workspaceString ++ "\n")
