@@ -2,13 +2,8 @@
 set t_Co=256
 set termguicolors
 syntax on
-set background=dark
-let ayucolor="mirage"
-colorscheme ayu
 
 " editor
-set cursorline
-set cursorcolumn
 set noshowmode
 set number
 set relativenumber
