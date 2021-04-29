@@ -1,7 +1,7 @@
 [diff]
-	tool = vimdiff
+	tool = meld
 [core]
-	editor = vim
+	editor = nvim
 	autocrlf = false
 	fileMode = false
 	excludesfile = ~/.gitignore
@@ -14,9 +14,9 @@
 [help]
 	autocorrect = 20
 [merge]
-	tool = nvimdiff
+	tool = meld
 [user]
-	email = fuchstobs@gmail.com
+	email = tobias.fuchst@tfox.tech
 	name = Tobias Fuchs
 [filter "lfs"]
 	clean = git-lfs clean -- %f

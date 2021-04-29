@@ -68,3 +68,11 @@ todo.md
 *.ist
 *.syg
 .hidden.make
+build-*
+*.user
+bin
+compile_commands.json
+*.swp
+.idea
+cmake-build-debug
+cmake-build-debug-docker-dev

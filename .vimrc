@@ -9,13 +9,12 @@ Plug 'junegunn/fzf', { 'dir': '~/bin/.fzf', 'do': './install --all' }
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'ycm-core/YouCompleteMe' | Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'nanotech/jellybeans.vim'
-Plug 'Raimondi/delimitMate' 
+Plug 'Raimondi/delimitMate'
 call plug#end()
 " }}}
 " UltiSnips{{{
@@ -29,15 +28,15 @@ nnoremap <C-p> :FZF<CR>
 " lightline {{{
 set laststatus=2
 let g:lightline = {
-	\ 'colorscheme': 'jellybeans',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-     	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-     	\ },
-     	\ 'component_function': {
-     	\   'gitbranch': 'gitbranch#name'
-     	\ },
-     	\ }
+            \ 'colorscheme': 'jellybeans',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'gitbranch#name'
+            \ },
+            \ }
 " }}}
 " NerdTREE {{{
 autocmd StdinReadPre * let s:std_in=1
@@ -45,6 +44,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 nnoremap <C-T> : NERDTreeToggle<CR>
+nnoremap <C-N> : NERDTreeFind<CR>
 " }}}
 " YCM {{{
 let g:ycm_use_clangd = 1
@@ -85,6 +85,7 @@ set smartcase
 " autosave
 au FocusLost * silent! wa
 set autowriteall
+au BufWrite * :Autoformat
 " History and undo {{{
 set history=1000
 set undofile
@@ -101,7 +102,7 @@ set ttyfast
 set so=3
 inoremap jj <esc>
 inoremap kk <esc>
-set relativenumber
+set number relativenumber
 " }}}
 " Save on Enter
 nnoremap <cr> :w \|  nohlsearch<cr>
