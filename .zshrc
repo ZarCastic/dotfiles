@@ -1,20 +1,10 @@
-# for virtualenv
-source =virtualenvwrapper.sh
-
-# Plugins :)
-source ~/.zplug/init.zsh
-
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -27,7 +17,7 @@ set -o vi
 # dangit CDPATH
 export CDPATH=$HOME:$HOME/Projects:$HOME/Scripts:$HOME/Projects/Uni
 
-eval $(dircolors ~/.dircolors)
+
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -48,12 +38,12 @@ setopt HIST_SAVE_NO_DUPS
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="random"
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
 #ZSH_THEME="theunraveler"
 #ZSH_THEME="xiong-chiamiov-plus"
 #ZSH_THEME="fino"
 #ZSH_THEME="obraun"
-#ZSH_THEME="frisk"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="agnoster"
 #ZSH_THEME="dst"
 #ZSH_THEME="3den"
@@ -127,4 +117,7 @@ export TERM=xterm-256color
 export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH=/usr/local/bin:$PATH:$HOME/Scripts:$HOME/bin
 
-[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
