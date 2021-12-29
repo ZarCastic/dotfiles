@@ -92,7 +92,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting docker docker-compose)
+plugins=(git docker docker-compose)
 
 # User configuration
 
@@ -116,8 +116,6 @@ eval $(thefuck --alias)
 export TERM=xterm-256color
 export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH=/usr/local/bin:$PATH:$HOME/Scripts:$HOME/bin
-
-[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -1,0 +1,6 @@
+[submodule "/Users/tobi/.config/nvim"]
+	path = /Users/tobi/.config/nvim
+	url = git@github.com:albingroen/quick.nvim.git
+[submodule "/Users/tobi/.local/share/nvim/site/pack/packer/start/packer.nvim"]
+	path = /Users/tobi/.local/share/nvim/site/pack/packer/start/packer.nvim
+	url = https://github.com/wbthomason/packer.nvim
