@@ -1,0 +1,10 @@
+{
+"languageserver": {
+    "docker_clangd": {
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "host": "127.0.0.1",
+      "port": 50505
+    }
+  }
+}
+
