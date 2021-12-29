@@ -92,7 +92,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose)
+plugins=(git docker docker-compose zsh-autosuggestions)
 
 # User configuration
 
@@ -111,6 +111,8 @@ source $HOME/Scripts/functions.sh
 source ~/.aliases.zsh
 
 eval $(thefuck --alias)
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#39b978,bold,underline"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export TERM=xterm-256color
