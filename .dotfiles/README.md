@@ -4,7 +4,7 @@ Easy way to share dotfiles between different machines.
 
 For easy installation, run
 
-    git clone --bare https://github.com/handycap/dotfiles.git $HOME/.dotfiles
+    git clone --bare https://github.com/ZarCastic/dotfiles.git $HOME/.dotfiles
     alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
     dots config status.showUntrackedFiles no
     dots checkout
